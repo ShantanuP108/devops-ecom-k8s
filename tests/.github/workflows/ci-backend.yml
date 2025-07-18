@@ -1,0 +1,38 @@
+name: Backend CI
+
+# Trigger the workflow on pushes or pull requests to the main branch
+# but only for changes in the 'services' or '.github/workflows' directories
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'services/**'
+      - '.github/workflows/ci-backend.yml'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'services/**'
+
+jobs:
+  build-and-test:
+    name: Build and Test Backend Service
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        # This assumes all services might have their own requirements.
+        # We're focusing on product-service for now.
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r services/product-service/requirements.txt
+
+      - name: Run Tests with Pytest
+        run: pytest tests/test_product_service.py
