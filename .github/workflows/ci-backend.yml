@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
     paths:
       - 'services/**'
-      - '.github/workflows/**' # Updated path to catch all workflow changes
+      - '.github/workflows/**'
   pull_request:
     branches: [ "main" ]
     paths:
@@ -13,16 +13,12 @@ on:
 
 jobs:
   build-and-test:
-    name: Build and Test Backend Service
+    name: Build, Test, and Push Docker Image
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      # --- ADD THIS DEBUGGING STEP ---
-      - name: List files in repository
-        run: ls -R
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -36,3 +32,16 @@ jobs:
 
       - name: Run Tests with Pytest
         run: pytest tests/test_product_service.py
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./services/product-service
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/product-service:latest
