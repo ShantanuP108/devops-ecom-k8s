@@ -7,3 +7,5 @@ app = FastAPI(title="Product Service")
 def read_root():
     """A simple root endpoint that returns a welcome message."""
     return {"service": "Product Service", "status": "ok"}
+
+# Triggering a new build
