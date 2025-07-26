@@ -2,10 +2,6 @@
 DevOps E-Commerce Kubernetes Project (DevOps-ECom-K8s)
 This project demonstrates a complete, end-to-end DevOps workflow for a microservices-based e-commerce application. The entire infrastructure is managed as code and deployed to a Kubernetes cluster on AWS, showcasing modern cloud-native practices from planning and development to monitoring and security.
 
-🎥 Live Demo
-(Placeholder: This is where you would embed a link to a video recording of you deploying and demonstrating the live application.)
-
-[Watch the Full Deployment and Demo Here]
 
 🏛️ Architecture Diagram
 This diagram illustrates the flow of the CI/CD pipeline and the deployed application architecture on AWS.
