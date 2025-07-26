@@ -173,3 +173,6 @@ cd iac
 
 # Destroy all AWS resources
 terraform destroy
+
+<img width="927" height="404" alt="Screenshot 2025-07-25 174423" src="https://github.com/user-attachments/assets/55671a4b-4316-4d12-860e-1210aedda118" />
+
